@@ -1,6 +1,5 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { User } from 'src/entities/user.entity';
 
 export const getPostgresConfig = (
   configService: ConfigService,
@@ -13,6 +12,6 @@ export const getPostgresConfig = (
     password: configService.get('DBMS_POSTGRES_PASSWORD'),
     database: configService.get('DBMS_POSTGRES_DBNAME'),
     synchronize: configService.get('DBMS_POSTGRES_SYNCHRONIZE'),
-    entities: [User],
+    entities: [],
   };
 };

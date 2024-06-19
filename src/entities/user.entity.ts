@@ -1,95 +1,69 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
-import { IsString, Length, IsUrl, IsDate, IsEmail, isNotEmpty, IsNotEmpty } from "class-validator";
-import { USER_DEFAULT_ABOUT_TEXT, USER_DEFAULT_AVATAR_LINK } from "src/constants/users";
-import { DBMS_STRING_TYPE } from "src/constants/dbms";
-import { ApiProperty } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
+import { IsEmail, IsNotEmpty, IsString, IsUrl, Length } from "class-validator";
+import { USER_DEFAULT_ABOUT_TEXT, USER_DEFAULT_AVATAR_LINK } from "src/constants/users";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
-export class User {
+@Entity({comment: 'Пользователи', name: 'users' })
+export class UserEntity {
 
-  @ApiProperty({
-    description: 'Уникальный идентификатор'
-  })
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @ApiProperty({
-    description: 'Дата создания'
-  })
-  @CreateDateColumn({ type: 'timestamp with time zone' })
-  @IsDate()
-  createdAt: Date;
-
-  @ApiProperty({
-    description: 'Дата обновления'
-  })
-  @UpdateDateColumn({ type: 'timestamp with time zone' })
-  @IsDate()
-  updatedAt: Date;
-
-  @ApiProperty({
-    description: 'Имя пользователя',
-    example: 'Жак Ив Кусто',
-  })
   @Column({
-    type: DBMS_STRING_TYPE,
+    comment: 'Имя пользователя',
     length: 64,
     unique: true,
-    nullable: false,
   })
   @IsNotEmpty()
   @IsString()
   @Length(1, 64)
   username: String;
 
-  @ApiProperty({
-    description: 'Описание пользователя',
-    example: USER_DEFAULT_ABOUT_TEXT,
-  })
   @Column({
-    type: DBMS_STRING_TYPE,
+    comment: 'Описание',
     default: USER_DEFAULT_ABOUT_TEXT,
-    length: 200
+    length: 200,
   })
   @IsString()
-  @Length(1, 200)
+  @Length(0, 200)
   about: String;
 
-  @ApiProperty({
-    description: 'Ссылка на аватар',
-    example: USER_DEFAULT_AVATAR_LINK,
-  })
   @Column({
-    type: DBMS_STRING_TYPE,
+    comment: 'Аватар (ссылка)',
     default: USER_DEFAULT_AVATAR_LINK,
   })
   @IsUrl()
   avatar: String;
 
-  @ApiProperty({
-    description: 'Адрес электронной почты',
-    example: 'mail@example.com',
-  })
   @Column({
-    type: DBMS_STRING_TYPE,
+    comment: 'Электронная почта',
     unique: true,
-    nullable: false,
   })
   @IsNotEmpty()
   @IsEmail()
   email: String;
 
-  @ApiProperty({
-    description: 'Пароль пользователя',
-    example: ''
-  })
-  @Column({
-    type: DBMS_STRING_TYPE,
-    select: false,
-  })
+  @Column({ 
+    comment: 'Пароль',
+    select: false, })
+  @IsNotEmpty()
   @IsString()
   @Length(2)
   @Exclude({})
   password: String;
+
+  @PrimaryGeneratedColumn({
+    comment: 'Уникальный идентификатор'
+  })
+  id: number;
+
+  @CreateDateColumn({
+    comment: 'Дата создания',
+    type: 'timestamp with time zone',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    comment: 'Дата обновления',
+    type: 'timestamp with time zone'
+  })
+  updatedAt: Date;
+
 }
