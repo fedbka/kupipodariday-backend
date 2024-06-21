@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { getPostgresConfig } from './configs/postgres.config';
 import { UsersModule } from './users/users.module';
 import { WishesModule } from './wishes/wishes.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
 import { OffersModule } from './offers/offers.module';
+
+
 
 @Module({
   imports: [
@@ -23,4 +25,4 @@ import { OffersModule } from './offers/offers.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
