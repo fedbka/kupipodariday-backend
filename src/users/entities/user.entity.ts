@@ -1,7 +1,10 @@
 import { Exclude } from "class-transformer";
 import { IsEmail, IsNotEmpty, IsString, IsUrl, Length } from "class-validator";
-import { USER_DEFAULT_ABOUT_TEXT, USER_DEFAULT_AVATAR_LINK } from "src/constants/users";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Offer } from "src/offers/entities/offer.entity";
+import { USER_DEFAULT_ABOUT_TEXT, USER_DEFAULT_AVATAR_LINK } from "src/users/constants/users";
+import { Wish } from "src/wishes/entities/wish.entity";
+import { Wishlist } from "src/wishlists/entities/wishlist.entity";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany } from "typeorm";
 
 @Entity({comment: 'Пользователи', name: 'users' })
 export class User {
@@ -22,7 +25,7 @@ export class User {
     length: 200,
   })
   @IsString()
-  @Length(0, 200)
+  @Length(2, 200)
   about: String;
 
   @Column({
@@ -45,9 +48,18 @@ export class User {
     select: false, })
   @IsNotEmpty()
   @IsString()
-  @Length(2)
+  @Length(2,)
   @Exclude({})
   password: String;
+
+  @OneToMany(() => Wish, wish => wish.owner)
+  wishes: Wish[];
+
+  @OneToMany(() => Offer, offer => offer.user)
+  offers: Offer[];
+  
+  @OneToMany(() => Wishlist, wishlist => wishlist.owner)
+  wishlists: Wishlist[];
 
   @PrimaryGeneratedColumn({
     comment: 'Уникальный идентификатор'

@@ -1,1 +1,0 @@
-export const DBMS_STRING_TYPE = 'varchar';
