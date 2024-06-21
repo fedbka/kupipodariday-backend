@@ -1,6 +1,9 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Offer } from 'src/offers/entities/offer.entity';
 import { User } from 'src/users/entities/user.entity';
+import { Wish } from 'src/wishes/entities/wish.entity';
+import { Wishlist } from 'src/wishlists/entities/wishlist.entity';
 
 export const getPostgresConfig = (
   configService: ConfigService,
@@ -13,6 +16,6 @@ export const getPostgresConfig = (
     password: configService.get('DBMS_POSTGRES_PASSWORD'),
     database: configService.get('DBMS_POSTGRES_DBNAME'),
     synchronize: configService.get('DBMS_POSTGRES_SYNCHRONIZE'),
-    entities: [User],
+    entities: [User, Wish, Wishlist, Offer],
   };
 };
