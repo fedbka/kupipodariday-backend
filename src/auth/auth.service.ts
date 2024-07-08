@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { HashService } from 'src/hash/hash.service';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { AUTH_ERROR_MESSAGE_INCORRECT_PASSWORD, AUTH_ERROR_MESSAGE_USER_NOT_FOUND } from './constants/auth';
-import { HashService } from 'src/hash/hash.service';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
     const payload = { sub: user.id };
 
     const signedPayload = await this.jwtService.signAsync(payload);
-    return { access_token: signedPayload}
+    return { access_token: signedPayload }
   }
 
   async validateUserPassword(username: string, password: string): Promise<User> {

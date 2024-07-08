@@ -9,12 +9,12 @@ import { User } from 'src/users/entities/user.entity';
 import { UpdateWishDto } from 'src/wishes/dto/update-wish.dto';
 
 @ApiTags('Wishlistlists')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('wishlistlists')
 export class WishlistsController {
   constructor(private readonly wishlistsService: WishlistsService) {}
 
-  @ApiBearerAuth()
   @Post()
   async create(
     @Req() { user }: { user: User },
@@ -37,7 +37,6 @@ export class WishlistsController {
     return this.wishlistsService.findById(id);
   }
 
-  @ApiBearerAuth()
   @Patch(':id')
   async updateOne(
     @Req() { user }: { user: User },
@@ -47,7 +46,6 @@ export class WishlistsController {
     return this.wishlistsService.updateOne(id, dto, user);
   }
 
-  @ApiBearerAuth()
   @Delete(':id')
   async deleteOne(
     @Req() { user }: { user: User },

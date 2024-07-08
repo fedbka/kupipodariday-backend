@@ -1,17 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
-import { OffersService } from './offers.service';
-import { CreateOfferDto } from './dto/create-offer.dto';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { User } from 'src/users/entities/user.entity';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateOfferDto } from './dto/create-offer.dto';
 import { Offer } from './entities/offer.entity';
+import { OffersService } from './offers.service';
+
 @ApiTags('Offers')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @Controller('offers')
 export class OffersController {
   constructor(private readonly offersService: OffersService) { }
-  
-  @ApiBearerAuth()
+
   @Post()
   async create(
     @Req() { user }: { user: User },
@@ -19,13 +20,11 @@ export class OffersController {
     return this.offersService.create(dto, user);
   }
 
-  @ApiBearerAuth()
   @Get()
   async findAll(): Promise<Offer[] | null> {
     return this.offersService.findMany({});
   }
 
-  @ApiBearerAuth()  
   @Get(':id')
   async findOne(
     @Param('id') id: string

@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Length, MaxLength } from "class-validator";
+import { IsNotEmpty, IsString, IsUrl, Length, MaxLength } from "class-validator";
 import { User } from "src/users/entities/user.entity";
 import { Wish } from "src/wishes/entities/wish.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn, JoinTable } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ comment: 'Списки подарков', name: 'wishlists' })
 export class Wishlist {
@@ -23,7 +23,7 @@ export class Wishlist {
   @IsString()
   @MaxLength(1500)
   description: String;
-  
+
   @Column({
     comment: 'Обложка (ссылка)',
   })

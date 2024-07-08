@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true,  });
+  const app = await NestFactory.create(AppModule, { cors: true, });
 
   const config = new DocumentBuilder()
     .setTitle('Сервис "КупиПодариДай"')

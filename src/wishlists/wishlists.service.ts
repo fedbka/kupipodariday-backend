@@ -1,13 +1,13 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateWishlistDto } from './dto/create-wishlist.dto';
-import { UpdateWishlistDto } from './dto/update-wishlist.dto';
-import { User } from 'src/users/entities/user.entity';
-import { FindManyOptions, Repository } from 'typeorm';
-import { Wishlist } from './entities/wishlist.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
 import { WishesService } from 'src/wishes/wishes.service';
-import { WISHLISTS_ERROR_MESSAGE_NOT_FOUND, WISHLISTS_ERROR_MESSAGE_FORBIDВEN } from './constants/wishlists';
+import { FindManyOptions, Repository } from 'typeorm';
+import { WISHLISTS_ERROR_MESSAGE_FORBIDВEN, WISHLISTS_ERROR_MESSAGE_NOT_FOUND } from './constants/wishlists';
+import { CreateWishlistDto } from './dto/create-wishlist.dto';
+import { UpdateWishlistDto } from './dto/update-wishlist.dto';
+import { Wishlist } from './entities/wishlist.entity';
 
 @Injectable()
 export class WishlistsService {
@@ -89,6 +89,6 @@ export class WishlistsService {
 
     return deletedWishlist;
 
-  }  
+  }
 
 }

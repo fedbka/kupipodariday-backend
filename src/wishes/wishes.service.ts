@@ -1,11 +1,11 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateWishDto } from './dto/create-wish.dto';
-import { UpdateWishDto } from './dto/update-wish.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { FindManyOptions, Repository } from 'typeorm';
+import { WISH_ERROR_MESSAGE_FORBIDВEN, WISH_ERROR_MESSAGE_FORBIDВEN_CHANGE_PRICE, WISH_ERROR_MESSAGE_NOT_FOUND } from './constants/wishes';
+import { CreateWishDto } from './dto/create-wish.dto';
+import { UpdateWishDto } from './dto/update-wish.dto';
 import { Wish } from './entities/wish.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { WISH_ERROR_MESSAGE_FORBIDВEN, WISH_ERROR_MESSAGE_NOT_FOUND, WISH_ERROR_MESSAGE_FORBIDВEN_CHANGE_PRICE } from './constants/wishes';
 
 @Injectable()
 export class WishesService {

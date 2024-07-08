@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Length } from "class
 import { Offer } from "src/offers/entities/offer.entity";
 import { User } from "src/users/entities/user.entity";
 import { Wishlist } from "src/wishlists/entities/wishlist.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ comment: 'Подарки', name: 'wishes' })
 export class Wish {

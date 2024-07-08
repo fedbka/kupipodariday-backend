@@ -2,12 +2,12 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HashService } from 'src/hash/hash.service';
-import { FindOneOptions, Like, Repository } from 'typeorm';
+import { Wish } from 'src/wishes/entities/wish.entity';
+import { Like, Repository } from 'typeorm';
 import { USER_ERROR_MESSAGE_ALREADY_EXISTS, USER_ERROR_MESSAGE_NOT_FOUND } from './constants/users';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Wish } from 'src/wishes/entities/wish.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -91,7 +91,7 @@ export class UsersService {
 
   async getWishesByUsername(
     username: string
-  ): Promise<Wish[]>  {
+  ): Promise<Wish[]> {
     const user = await this.usersRepository.findOne({
       where: { username },
       relations: {
@@ -101,7 +101,7 @@ export class UsersService {
         },
       }
     });
-    
+
     if (!user) {
       throw new NotFoundException(USER_ERROR_MESSAGE_NOT_FOUND);
     }
