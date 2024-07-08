@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local.guard';
 
 
-@ApiTags('Регистрация и Аутентификация пользователей')
+@ApiTags('Authentication')
 @Controller('')
 export class AuthController {
   constructor(

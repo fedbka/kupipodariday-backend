@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Length } from "class
 import { Offer } from "src/offers/entities/offer.entity";
 import { User } from "src/users/entities/user.entity";
 import { Wishlist } from "src/wishlists/entities/wishlist.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ comment: 'Подарки', name: 'wishes' })
 export class Wish {
@@ -14,19 +14,21 @@ export class Wish {
   @IsNotEmpty()
   @IsString()
   @Length(1, 250)
-  name: String;
+  name: string;
 
   @Column({
     comment: 'Где продаётся (ссылка)',
   })
+  @IsNotEmpty()
   @IsUrl()
-  link: String;
+  link: string;
 
   @Column({
     comment: 'Изображение (ссылка)',
   })
+  @IsNotEmpty()
   @IsUrl()
-  image: String;
+  image: string;
 
   @Column({
     comment: 'Стоимость',
@@ -35,9 +37,10 @@ export class Wish {
     scale: 2,
     default: 0,
   })
+  @IsNotEmpty()
   @IsNumber()
   @IsPositive()
-  price: Number;
+  price: number;
 
   @Column({
     comment: 'Собрано',
@@ -48,7 +51,7 @@ export class Wish {
   })
   @IsNumber()
   @IsPositive()
-  raised: Number;
+  raised: number;
 
   @ManyToOne(() => User, (user) => user.wishes)
   @JoinColumn()
@@ -60,10 +63,15 @@ export class Wish {
   })
   @IsString()
   @Length(1, 1024)
-  description: String;
+  description: string;
 
-  @OneToMany(() => Offer, (offer) => offer.item)
+  @OneToMany(() => Offer, (offer) => offer.item, {
+    onDelete: 'CASCADE',
+  })
   offers: Offer[];
+
+  @ManyToMany(() => Wishlist, (wishlist) => wishlist.items)
+  wishlists: Wishlist[];
 
   @Column({
     comment: 'Счетик скопировавших себе',
@@ -74,7 +82,7 @@ export class Wish {
   })
   @IsNumber()
   @IsPositive()
-  copied: Number;
+  copied: number;
 
   @PrimaryGeneratedColumn({
     comment: 'Уникальный идентификатор'

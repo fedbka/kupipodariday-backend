@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateWishlistDto } from './create-wishlist.dto';
+import { Wishlist } from '../entities/wishlist.entity';
 
-export class UpdateWishlistDto extends PartialType(CreateWishlistDto) {}
+export class UpdateWishlistDto extends PartialType(Wishlist) {}

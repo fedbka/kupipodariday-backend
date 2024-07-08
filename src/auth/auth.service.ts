@@ -27,7 +27,7 @@ export class AuthService {
       throw new UnauthorizedException(AUTH_ERROR_MESSAGE_USER_NOT_FOUND);
     }
 
-    const storedPasswordHash = await this.usersService.getStoredPasswordHashByUsername(user.username);
+    const storedPasswordHash = await this.usersService.getStoredPasswordHashByUsername(username);
 
     if (!storedPasswordHash) {
       throw new UnauthorizedException(AUTH_ERROR_MESSAGE_USER_NOT_FOUND);

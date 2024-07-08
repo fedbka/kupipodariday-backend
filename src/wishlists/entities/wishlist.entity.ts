@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Length } from "class-validator";
+import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Length, MaxLength } from "class-validator";
 import { User } from "src/users/entities/user.entity";
 import { Wish } from "src/wishes/entities/wish.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn, JoinTable } from "typeorm";
@@ -18,9 +18,10 @@ export class Wishlist {
   @Column({
     comment: 'Описание',
     length: 1500,
+    default: '',
   })
   @IsString()
-  @Length(1, 1500)
+  @MaxLength(1500)
   description: String;
   
   @Column({
@@ -29,11 +30,13 @@ export class Wishlist {
   @IsUrl()
   image: String;
 
-  @ManyToOne(() => User, user => user.wishlists)
+  @ManyToOne(() => User, user => user.wishlists, {
+    nullable: false,
+  })
   @JoinColumn()
   owner: User;
 
-  @ManyToMany(() => Wish)
+  @ManyToMany(() => Wish, (wish) => wish.id)
   @JoinTable()
   items: Wish[];
 
