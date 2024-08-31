@@ -1,0 +1,2 @@
+export const AUTH_ERROR_MESSAGE_USER_NOT_FOUND = 'Неверные имя пользователя или пароль';
+export const AUTH_ERROR_MESSAGE_INCORRECT_PASSWORD = AUTH_ERROR_MESSAGE_USER_NOT_FOUND;

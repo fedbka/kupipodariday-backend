@@ -1,0 +1,20 @@
+export const USER_ABOUT_DESCRIPTION = 'Описание';
+export const USER_ABOUT_EXAMPLE = 'Пока ничего не рассказал о себе';
+export const USER_AVATAR_DESCRIPTION = 'Аватар (ссылка)';
+export const USER_AVATAR_EXAMPLE = 'https://i.pravatar.cc/300';
+export const USER_CREATED_AT_DESCRIPTION = 'Дата создания';
+export const USER_EMAIL_DESCRIPTION = 'Электронная почта';
+export const USER_EMAIL_EXAMPLE = 'user@yandex.com';
+export const USER_ID_DESCRIPTION = 'Уникальный идентификатор';
+export const USER_OFFERS_DESCRIPTION = 'Отклики';
+export const USER_PASSWORD_DESCRIPTION = 'Пароль';
+export const USER_PASSWORD_EXAMPLE = 'FNs<hjcbkRehbnm!';
+export const USER_UPDATED_AT_DESCRIPTION = 'Дата обновления';
+export const USER_USERNAME_DESCRIPTION = 'Имя пользователя';
+export const USER_USERNAME_EXAMPLE = 'Жак Ив Кусто';
+export const USER_WISHES_DESCRIPTION = 'Подарки';
+export const USER_WISHLISTS_DESCRIPTION = 'Списки подарков';
+
+export const USER_ERROR_MESSAGE_ALREADY_EXISTS = 'Пользователь с указанными "username" или "email" зарегистрирован ранее.';
+export const USER_ERROR_MESSAGE_INCORRECT_ID = 'Некорректный идентификатор пользователя';
+export const USER_ERROR_MESSAGE_NOT_FOUND = 'Пользователь с указанным идентификатором не найден';
